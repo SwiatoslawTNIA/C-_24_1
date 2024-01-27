@@ -1,11 +1,13 @@
 CPP := g++
 CXXFLAGS := -Wall -Wextra 
 #Link the files:
-run: cpp
-	./cpp
+run: c1
+	./c1
 
 
-cpp: cpp.o
+c: cpp.o
+c1: c1.o
+c1.o: c1.cc
 cpp.o: cpp.cpp
 
 %: %.o
