@@ -1,5 +1,5 @@
 CPP := g++
-CXXFLAGS := -Wall -Wextra 
+CXXFLAGS := -Wall -Wextra -Wpedantic 
 #Link the files:
 run: c1
 	./c1
