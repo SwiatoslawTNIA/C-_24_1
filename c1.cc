@@ -1,316 +1,245 @@
 #include <iostream>
 #include <cmath>
-#include <climits>
-#define ZERO 0
-#define PI 3.14
+#include <cstring>
+#include <string>
+
+
+void array(void);
+void name(void);
+void name1(void);
+void check_getline(void);
+void get_name(void);
+void house(void);
+void theStringClass(void);
+void more(void);
+void structs(void);
+void enums(void);
+void pointers(void);
 using namespace std;
-void printSizes(void);
-void printSizes2(void);
-void defineVars(void);
-void exceed_value(void);
-void display_formats(void);
-void enter_char(void);
-void compare_int_char(void);
-void chars_1(void);
-void intern_chars(void);
-void bools(void);
-void floats_1(void);
-void number_overflow(void);
-void division(void);
-void pounds_to_stone(void);
-void convertion(void);
-void ex_1(void);
-void ex_2(void);
-void ex_3(void);
-void ex_4(void);
-void ex_5(void);
-void ex_6(void);
-void ex_7(void);
 
 int main(void)
 {
-  ex_7();
-
+  // cout << sizeof(long double) << "--" << sizeof(long long);
+  pointers();
   return 0;
 }
-void ex_7(void)
+void pointers(void)
 {
-  float liters_per_100_km = 0.0F;
-  double one_mile_fuel_consumption = 0.0, gallons_consumption = 0.0, gallon_distance_km = 0.0,
-  miles_per_gallon = 0.0;
-  cout << "Enter an automobile gasoline consumption figure in format l/100km:";
-  cin >> liters_per_100_km;
-  //convert to miles per gallon:
-  //the total is 100 km in liters_per_100_km liters;
-  gallons_consumption = liters_per_100_km / 3.875;//gallons per 100km;
-  miles_per_gallon = 62.14 / gallons_consumption;//now we find how many km we do in 1 gallon;
-  cout << "The consumption is: " << miles_per_gallon << " miles/gallon.";
-}
-void ex_6(void)
-{
-  double kilometers = 0.0, liters = 0.0, consumption = 0.0;
-  cout << "How many kilometers have you driven?";
-  cin >> kilometers;
-  cout << "How many liters have you spent?";
-  cin >> liters;
-  consumption = liters / kilometers * 100;//consumption per 1 kilometer in percents
-  cout << "The consumtion of your vehicle is: " << consumption << " l/100km";
-}
-void ex_5(void)
-{
-  unsigned long long population = 0ULL, country_population = 0ULL;
-  long double difference = 0.0L;
-  cout << "Enter the world's population: ";
-  cin >> population;
-  cout << "Enter the population of the US: ";
-  cin >> country_population;
-  //compute the percentage:
-  difference = (long double)country_population / population * 100;
-  cout << "The population of the US is " << difference << " of the world's population";
-}
-void ex_4(void)
-{
-  unsigned long long value = 0;
-  long days = 0;
-  int hours = 0, minutes = 0, seconds = 0, temp = 0;
-  cout << "Enter the number of seconds: ";
-  cin >> value;
-  //an algorithm to compute days;
-  //1 hour = 3600 seconds; 1 day = 86400s; 
-  //find the amount of days:
-  days = value / 86400;//we are counting in int, so all fractional parts are discarded
-  temp = value - days * 86400;
-  hours = temp / 3600;
-  temp = temp - hours * 3600;// the remaining after the hours were counted
-  minutes = temp / 60;
-  temp = temp - minutes * 60;
-  seconds = temp;
-  cout << value << " seconds = " << days << " days, " << hours << " hours, " << minutes << " minutes, "
-  << seconds << " seconds.";
-}
-void ex_3(void)
-{
-  int degrees = 0, minutes = 0, seconds = 0;
-  double coord = 0.0, min = 0.0, sec = 0.0;
-  cout << "Enter a latitude in degrees, minutes, and seconds:\nFirst, enter the degrees:";
-  cin >> degrees;
-  cout << "\nNext, enter the minutes of arc:";
-  cin >> minutes;
-  cout << "\nFinally enter the seconds of arc:";
-  cin >> seconds;
-  //convertion: 
-  coord += degrees;//add the degrees;
-  //convert minutes to 100:.xx:
-  min = minutes / 60.0;//the minutes will be converted to double
-  sec = seconds / 3600.0;//the seconds will be converted to double
-  coord += min + sec;
-  cout << degrees << " degrees, " << minutes << " minutes, " << seconds << " seconds  = "
-  << coord << " degrees";
-}
-
-void ex_2(void)
-{
-  int weight = 0, feet = 0, inches = 0, inches_total = 0;
-  double height = 0.0, meters = 0.0, kilograms = 0.0, bmi = 0.0;//defined height in float;
-  cout << "Please enter your height: " << endl;
-  cin >> height;
-  //calc the inches and feet:
-  feet = height;//convert float to int, by leaving everthing after the floating point
-  inches = 10 * (height - feet);
-  cout << inches;
-  inches_total = inches + feet * 12;
-  meters = inches_total * 0.0254;
-  cout << "Please enter your weight in pounds: " << endl;
-  cin >> weight;
-  kilograms = weight / 2.2;//weight is converted to double, 
-  bmi = kilograms / (meters * meters);
-  cout << "Your BMI is: " << bmi << endl;
-}
-void ex_1(void)
-{
-  const int BASE = 12;
-  int inches = 0, feet = 0, remainder = 0;
-  cout << "Please enter the height in inches: ";
-  cin >> inches;
-  feet = inches / BASE;
-  remainder = inches % BASE;
-  cout << "You height is: " << feet << " feet and " << remainder << " inches.";
-}
-void convertion(void)
-{
-  cout.setf(ios_base::fixed, ios_base::floatfield);
-  float num = 4;//int converted to float
-  int d(5.44324);//double converted to int
-  // int debt = 7.2E12;//the result is undefined, displays an error
-  cout << "NUM: " << num << endl;
-  cout << "D: " << d << endl;
-  // cout << "Debt: " << debt << endl;
-}
-void pounds_to_stone(void)
-{
-  int pounds = 0, stones = 0, remainder = 0;
-  cout << "Enter the amount of pounds: ";
-  cin >> pounds;
-  stones = pounds / 14; //int / int = int
-  remainder = pounds % 14;
-  cout << "The converted values are: " << stones << " stones";
-  if(remainder > 0)
-  {
-    cout << ", and the rimainder: " << remainder << " pounds.";
-  }
-  else
-  {
-    cout.put('.');
-  }
-}
-void division(void)
-{
-  cout.setf(ios_base::fixed, ios_base::floatfield);
-  cout << "Integer division: 9/5: " <<  9 / 5 << endl;
-  cout << "Floating-point division: 9.0 / 5.0: " <<  9.0 / 5.0 << endl;
-  cout << "Mixed-point division: 9.0 /5: " <<  9.0 / 5.0 << endl;
-  cout << "float consts: 1e7f/9.0f: " <<  1e7f / 9.0f << endl;
-}
-
-void number_overflow(void)
-{
-  long double num = 1.3e+23L;
-  long double num_2 = num + 1.0L;
-  cout << "The difference between num_2 and num is " << num_2 - num << " >shocking ..." << endl;
-  //float is capable of holding appr. 13
-
-}
-void floats_1(void)
-{
-  cout.setf(ios_base::fixed, ios_base::floatfield);//fixed-point
-  float tub = 10.0 / 3.0; //good about 6 places
-  double mint = 10.0 / 3.0; //good to about 13 places
-  const float million = 1.0e+6;
-
-  cout << "Tub: " << tub;
-  cout << ", a million tubs: " << tub * million;
-  cout << ", and ten million tubs: " << 10 * million * tub << endl;
+  int value = 14;//a declaration:
+  cout << "The address of the variable value is: " << &value << endl;
+  //the basic usage of pointers in c++ is the same as in c:
+  int *p = &value;
+  cout << "The value of the pointer p is: " << *p;
+  unsigned long long *memory = new unsigned long long int;
+  //allocate memory for an unsigned long long int and get access to it through memory pointer;
+  *memory = 11ULL;//11 must be of type unsigned long long int, even though it should be converted
+  //by default, i'd still prefer that it would be converted later
   
-  cout << "and mints: " << mint << "a million mints: " << million * mint << endl;
+}
+//enums:
+void enums(void)
+{
+  enum days {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY};
+  //days is a name of a new type, MONDAY.. are enumerators
+  days day1 = TUESDAY;
+  //enums are ints
+  // day1 = 2;//invalid
+  day1 = days(2);//valid, used typecase
+  day1 = days(24);//even though the output was 24, the result is undefined, because we cannot express the value
+  //24 using our enumerators;(0-6) are valid versions, applicable for convertion.
+  days day2 = days(45);
+  cout << day2 << " ";
+
+  cout << day1;
+}
+void structs(void)
+{
+  struct temp
+  {
+    char name[20];
+    int value;
+    double arr[20];
+  };
+  //create an array of structs:
+  struct temp arr[100];
+  //initializing a structure:
+  struct temp guest[2] = 
+  {
+    {"James", 12, 4.3},
+    {"Peter", 23, -5.4}
+  };
+  arr[34] = {"Charles", 12, 4232.12};
+  //access the 35'th element's name:
+  cout << arr[34].name << " is gonna be probably nothing." << endl;
+  cout << "Name: " << guest[1].name << ", value: " << guest[1].value << ", arr: " << guest[1].arr[0];
+  struct BitStruct 
+  {
+    unsigned int SN: 4;//4 bits for SN variable
+    unsigned int : 4;//skip four bits
+    bool good_value: 1;//1 bit for good_value var
+    bool connected: 1;//1 bit for connected var
+  };
+  //create a new structure:
+  struct BitStruct structure = {13, false, false};
+  std::cout << structure.good_value;
+  struct widget 
+  {
+    char brand[20];
+    int type;//based on the type we determine the value stored inside the union:
+    union id//id is either char string or a number
+    {
+      unsigned long long id;
+      char ids[20];
+    } id_val;
+  };
+  widget example1  = {"Macintosh", 1, 123123214ULL};
+  cout << "The example values: " << example1.brand << example1.id_val.ids << endl;
+  //what if a union has no name?
+  struct widget1
+  {
+    char brand[20];
+    int type;
+    union //an anonymous union
+    {
+      unsigned long long id_num;
+      char id_str[20];
+    };
+  } widgettt;
+  if(widgettt.type == 1)
+    cin >> widgettt.id_str;
+  else 
+    cin >> widgettt.id_num;
+  // temp temp1 = {"John", 14, 0};//both declarations are valid in C++
+  // struct temp temp2 = {"John", 14, 0};
 
 }
-void bools(void)
+void more(void)
 {
-  bool value = false;
-  bool opp = true;
-  //the literals false and true can be converted to type int:
-  int truth = true;
-  int falsity = false;
-  cout << "Falsity: " << falsity << ", truth: " << truth << endl;
-  cout << "Falsity: " << value << ", truth: " << opp << endl;
-  //consts:
-  const int age = 19;
-  cout << "My age is " << age;
-  // age--;//error, the years are GONE!! Utilize the time that is left!!! by maximum!!!
+  // wchar_t title[] = L"The title array";
+  // char16_t n[] = u"Something";
+  // char32_t p[] = U"Something else";
+
+  //test the structure's assignment possibilities:
+  struct inflatable 
+  {
+    char name[20];
+    float weight;
+    double price;
+  };
+  struct inflatable bouquet = {"Joannita", 3.144, 14.56}, copy;
+  cout << "The bouquet: \n" << bouquet.name << " ---- price: " << bouquet.price << " -- weight: " << bouquet.weight;
+  //assign structs:
+  copy = bouquet;
+  cout << "\nThe second bouquet: " << copy.name << "--- price: " << copy.price << " -- weight: " << copy.weight;
+
+  char s[20] = {0};
+  s[19] = '\0';
+  string str;
+  cout << "The length of s is : " << strlen(s) << endl << "The length of str: " << str.size();
+  //get the input:
+  cout << "enter a line of input: " << endl;
+  cin.getline(s, 20);//store the data in the s char array
+  cout << "Enter another line of input: " << endl;
+  getline(cin, str);
+  cout << "The lines that you typed are: " << endl << s << "\n" << str << endl;
 }
-void intern_chars(void)
+void theStringClass(void)
 {
-  cout << "Try this: \u00AA \u00BC \u014A";
-  cout << endl << "The wchar_t type on the sys is " << sizeof(wchar_t) * 8 << " bits long";
-  long result = pow(2, sizeof(wchar_t) * 8) - 1;
-  cout << endl << "This gives us " << result << " possible characters" << endl;
-  // a wide character string and wide character constant:
-  // wchar_t ch = L'A';//the char input and output works without specifying the format L
-  // wchar_t str[] = L"Tall";
-  // wcout << str;
-  char16_t ch = u'B';//an unsigned char 16 bits long, 
-  char32_t ch_2 = U'C';//an unsigned char 32 bits long.
-  cout << "char16_t var: " << ch << endl;
-  cout << "char32_t var: " << ch_2 << endl;
-}
-void chars_1(void)
-{
-  cout << "Operation \"HyperHype\" activated.\n";
-  cout << "Enter your agent code: _______\b\b\b\b\b\b\b";
-  long code = 0;
-  cin >> code;
-  cout << "You've entered " << code << "code..." << endl;
-  cout << "Code verified. Proceed with plan A";
-}
-void compare_int_char(void)
-{
-  char c = 'm';
-  int i = c;//store the numerical value in char in a var of type int
-  cout << "The ASCII code for the character " << c << " is " << i << endl;
-  i = ++c;//add 1 to the numerical 
-  cout << "The ASCII code for the character " << c << " is " << i << endl;
-  //determine the char code of '5':
-  char a = '5';
-  int b = a;
-  cout << b;
-  cout.put(c);
-  cout.put('!');
-  char z = '\a';//an alarm
-  cout.put(z);
-  cout << "Don't do that again. Hacker??" << endl;
+  string s1, s2 = "penguin";
+  char s_1[20], s_2[20] = "experiment";
+  //assignment operations:
+  s1 = s2;
+  strcpy(s_1, s_2);
+  //appending:
+  strcat(s_1, " one");
+  s1 += " one";
+  //computing the length:
+  int arr_length = strlen(s_1);
+  int arr_l_c  = s1.size();
+  cout << "The results are following: \n" 
+  << "Char arr: " << s_1 << " and " << s_2 << " , length: " << arr_length << endl 
+  << "String arr: " << s1 << " and " << s2 << " , length: " << arr_l_c << endl;
 
 }
-void enter_char(void)
+// void copy(char *s1, char *s2)
+// {
+//   int i = 0;
+//   while(*(s2 + i) != '\0' && *(s1 + i) != '\0')
+//     s1[i] = s2[i++];
+  
+// }
+void house(void)
 {
-  char c;
-  cout << "Enter the character: " << endl;
-  cin >> c;
-  cout << "Thanks for your character \"" << c << "\", I appreciate it.";
+  string new_string;
+  string str_2 = "panther";
+  cout << str_2 << " and " << str_2[3] << "\n";
+  int year = 0;
+  char address[60];
+  cout << "What year was your house built?";
+  (cin >> year).get();//get the enter, that was left after the year integer.
+  cout << "What is the address of that house?";//there is no need for a \n because we have entered \n
+  //so the cursor moves to the next line
+  cin.getline(address, 60);
+  cout << "\nYear built: " << year << endl;
+  cout << "Address: " << address << endl;
 }
-void display_formats(void)
+void get_name(void)
 {
-  int n1 = 42, n2 = 42, n3 = 42;
-  cout << "The formats of the same nums are the following:" << endl;
-  cout << "Decimal: " << n1 << endl;
-  cout << hex << "Hexadecimal: " << n2 << endl;
-  cout << oct << "Octal: " << n3 << endl;
+  char name[50], dessert[50];//stores 49 chars
+  cout << "Enter your name: ";
+  cin.get(name, 50).get();//read up to a new_line, and then get that new_line with the second call to get()
+  cout << "\nEnter your dessert: ";
+  cin.get(dessert, 50).get();
+  cout << "I have some delicious dessert " << dessert << " for you, " << name;
 }
-void exceed_value(void)
+void check_getline(void)
 {
-  unsigned short account_1 = SHRT_MAX;
-  short account_2 = SHRT_MAX;
-  cout << "Account 1: " << account_1++ << ", account 2: " << account_2++ << endl;
-  cout << "Account 1: " << account_1-- << ", account 2: " << account_2-- << endl;
-  cout << "Account 1: " << account_1 << ", account 2: " << account_2 << endl;
+  cout << "Type";
+  char name[50];
+  cin.getline(name, 40);
+  cout << endl << "The sizeof: " << sizeof(name) << " and the strlen: " << strlen(name);
 }
-void defineVars(void)
+void name1(void)
 {
-  //all the declarations below, are valid, confirmed;
-  //the preprocessor directives can be used w
-  // unsigned short v1 = 0;
-  // unsigned int v2 = 0;
-  // unsigned long v3 = 0;
-  // unsigned long long v4 = 0;
+  // const int arr_size = 20;
+  // char name[arr_size] = {0}, dessert[arr_size] = {0};
+  // cout << "Enter your name\n";
+  // cin >> name;
+  // cout << "Enter your favorite dessert: \n";
+  // cin >> dessert;
+  // cout << "I have some delicious dessert " << dessert << " for you, " << name << endl;
+  //the corrected version:
+  const int arr_size = 20;
+  char name[arr_size] = {0}, dessert[arr_size] = {0};
+  cout << "Enter your name\n";
+  cin.getline(name, arr_size);
+  cin.get(dessert, arr_size);
 
-  long long s_num = 10;
-  long long s_num_1(10);
-  long long s_num_2 = {10};
-  long long s_num_3{10};
-  cout << s_num << ":" << s_num_1 << ":" << s_num_2 << ":" << s_num_3 << endl;
-  //initialize values to 0;
-  long long s_num_4 = 0;
-  long long s_num_5{};
-  long long s_num_6 = {};
-  cout << s_num_4 << ":" << s_num_5 << ":" << s_num_6  << endl;
+  // cin.get();
+  cout << "Enter your favorite dessert: \n";
 
+  cout << "I have some delicious dessert " << dessert << " for you, " << name << endl;
 
 }
-void printSizes(void)
+void name(void)
 {
-  cout << "The size of short is: " << sizeof(short) << " bytes" << endl;
-  cout << "The size of int is: " << sizeof(int) << " bytes" << endl;
-  cout << "The size of long is: " << sizeof(long) << " bytes" << endl;
-  cout << "The size of long long is: " << sizeof(long long) << " bytes" << endl;
+  char str1[15] = "Bob Marley";
+  char str2[15];
+  cout << "Hi. What is your name?: ";
+  cin >> str2;
+  cout << "Hi, " << str2 << endl;
+  cout << "Your name consists of " << strlen(str2) << " letters." << endl;
+  cout << "Your initials are :" << str2[0] << ".";
+  cout << "Here is my name:";
+  cout << str1;
 }
-void printSizes2(void)
+void array(void)
 {
-  //initialize the maximum sizes on the system:
-  int integer = INT_MAX;
-  short short_integer = SHRT_MAX;
-  long long_integer = LONG_MAX;
-  long long long_long_integer = LLONG_MAX;
-  cout << "The size of short is: " << sizeof(short_integer) << " bytes" << endl;
-  cout << "The size of int is: " << sizeof(integer) << " bytes" << endl;
-  cout << "The size of long is: " << sizeof(long_integer) << " bytes" << endl;
-  cout << "The size of long long is: " << sizeof(long_long_integer) << " bytes" << endl;
+  //initializing an array:
+  char array[10] = "Length";//a string of length 10 with string literal of length 6
+  cout << array[4] << " ";
+  cout.put(array[0]);
+  cout << endl << "The size of the created array is: " << sizeof(array) << endl;
+  cout << "An ex"
+  "periment";
 }
