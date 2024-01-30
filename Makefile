@@ -1,14 +1,14 @@
 CPP := g++
 CXXFLAGS := -Wall -Wextra -Wpedantic 
 #Link the files:
-run: c1
-	valgrind ./c1
+run: c
+	valgrind ./c
 
 
-c: cpp.o
-c1: c1.o
-c1.o: c1.cc
-cpp.o: cpp.cpp
+c: c.o
+c.o: c.cpp
+# c1.o: c1.cc
+# cpp.o: cpp.cpp
 
 %: %.o
 	$(CPP) $< -o $@
