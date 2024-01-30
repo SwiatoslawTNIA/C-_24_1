@@ -2,7 +2,8 @@
 #include <cmath>
 #include <cstring>
 #include <string>
-
+#include <vector>
+#include <array>
 
 void array(void);
 void name(void);
@@ -15,13 +16,198 @@ void more(void);
 void structs(void);
 void enums(void);
 void pointers(void);
+void dynamic_array(void);
+void dynamic_structs(void);
+void small_program(void);
+char *getName(void);
+void average_program(void);
+void ex_1(void);
+void ex_2(void);
+void ex_5(void);
+void ex_6(void);
+//exercises 3 and four were extremely boring
 using namespace std;
 
 int main(void)
 {
   // cout << sizeof(long double) << "--" << sizeof(long long);
-  pointers();
+  ex_6();
   return 0;
+}
+void ex_6(void)
+{
+  struct CandyBar
+  {
+    char brand_name[20];
+    float weight;
+    int calories;
+  };
+  CandyBar *p = new CandyBar[3];
+  p[0] = {"Nestle", 4.4, 500};
+  p[1] = {"Snickers", 124.2, 600};
+  p[2] = {"Jammy Joe", 100, 700};
+  //display the contents:
+  for( int i = 0; i < 3; ++i)
+  {
+    cout << "\nName: " << p[i].brand_name << ", weight: " << p[i].weight << ", calories: " << p[i].calories;
+  }
+  delete p;
+}
+void ex_5(void)
+{
+  struct CandyBar
+  {
+    char brand_name[20];
+    float weight;
+    int calories;
+  };
+  CandyBar snack = {"Mocha Munch", 2.3, 350};
+  cout << "Here are the contest of your favorite snack: \n";
+  cout << "Name: " << snack.brand_name << ", weight: " << snack.weight << ", calories: " << snack.calories;
+}
+void ex_2(void)
+{
+  char first_name[20], last_name[20], string[42];
+  cout << "Enter your first name: ";
+  cin >> first_name;
+  cout << "Enter your last name: ";
+  cin >> last_name;
+  strcpy(string, first_name);
+  int length = strlen(string);
+  string[length] = ',';
+  string[length + 1] = ' ';
+  strcat(string, last_name);
+  cout << "Here is the information in a single string: " << string;
+}
+void ex_1(void)
+{
+  char name[20], last_name[20], grade;
+  int age = 0;
+  cout << "What is your first name?";
+  cin.getline(name, 20);
+  cout << "What is your last name?";
+  cin.getline(last_name, 20);
+  cout << "What letter grade do you deserve?";
+  cin >> grade;
+  cout << "What is your age?";
+  cin >> age;
+  cout << "Name: " << last_name << ", " << name << "\nGrade: " << grade << "\n" << "Age: " << age << endl;
+}
+//work with vectors:
+void vectors(void)
+{
+  // vector <int> james;//created james object of type vector <int>
+  // //the vectors resize automatically, are less efficient than arrays.
+  // vector <double> arr(20);//created an array of doubles (20);
+  // //an array:
+  // std::array<int, 5> arrs;
+  // std::array<double, 15> new_arr;
+  // string str1 = "Waldorf Salad";
+  // struct Fish
+  // {
+  //   char kind[40];
+  //   int ounces;
+  //   float length;
+  // };
+  // enum Response {Yes = 1, No = 0, Maybe = 2};
+  // double ted = 634.324;
+  // double *ted_p = &ted;
+  // cout << "The value of the pointer to Ted is: " << *ted_p;
+  // cout << endl << "Write a positive integer: ";
+  // int integer = 0;
+  // cin >> integer;
+  // int *new_arr = new int [integer];
+  // vector<int> new_arr_2(integer);
+  // string arr[10];
+  // vector<strin g> st_r(10);
+}
+void average_program(void)
+{
+  struct people
+  {
+    char name[20];
+    short age;
+  };
+  people person1, person2, person3;
+  people *pointer = &person1;
+  person1.age = 17, person2.age = 18, person3.age = 19;
+  cout << "The age of the first person, essentially the person the pointer points to: " << (*pointer).age;
+  //create an array of pointers:
+  people * array[3] = {&person1, &person2, &person3};
+  //access the elements in that array:
+  cout << "The age of the second person is: " << array[1]->age << endl;
+  cout << "The age of the first person is: " << array[0]->age << endl;
+  cout << "The addresses of two pointers are: " << pointer << " " << array[0] << endl;
+  //create a pointer to an array of structs:
+  people **p_to_p = array;//since the array name is a pointer to its first element, 
+  //which itself is a pointer to struct, then the p_to_p should be a pointer to a pointer to struct 
+  //people type
+  cout << "The data: " << (*(*(p_to_p + 1))).age;
+}
+void small_program(void)
+{
+  char *name = getName();
+  cout << name;//Print the name 
+  delete [] name;//free the memory
+  //clear the buffer
+  name = getName();//allocate memory again for the new name, dynamically
+  cout << name;//print the new name
+  delete [] name;
+}
+
+char *getName(void)
+{
+  char temp[80];
+  cout << "Please enter you name: ";
+  cin.getline(temp, 80);
+  char *p = new char [strlen(temp) + 1];//+1 for null terminator
+  strcpy(p , temp);//copy the array
+  return p;
+}
+
+void dynamic_structs(void)
+{
+  struct inflatable 
+  {
+    char name[20];
+    float volume;
+    double price;
+  };
+  struct inflatable *p = new  inflatable;//this notation is possible, but it is very c-orientted
+  inflatable *real_p = new inflatable;
+  cout << "Enter a name of an inflatable item\n";
+  cin >> p->name;
+  cout << "\nPlease enter the volume: ";
+  cin >> p->volume;
+  cout << "\nand finally price: ";
+  cin >> p->price;
+  //free the memory:
+  //print the data:
+  cout << "\nThe following data has been entered: ";
+  cout << "Name: " << p->name << endl;
+  cout << "Volume: " << (*p).volume << endl;
+  cout << "Price: " << (*p).price << endl;
+  delete  p;
+  delete  real_p;
+}
+void dynamic_array(void)
+{
+  double *p = new double [40];//a pointer to an array of 40 doubles was created;
+  delete [] p;
+  //the proof the scale of a pointer:
+  int arr[30], *g = arr;
+  
+  cout << "The address of a pointer p before the increment: " << g << "\n";
+  cout << "The address of a pointer p after the increment: " << ++g;
+  //the pointer was incremented by 4 bytes, even though we added "1 phyiccally to it"
+  //the differences between an array name and a pointer to that array:
+  int b[40], *c = b;
+  cout << "\nsizeof b: " << sizeof(b);
+  cout << "\nsizeof c: " << sizeof(c);
+  //arrays continued:
+  short e[10];
+  cout << "\nAddress of e: " << e;
+  cout << "\nAddress of the whole array: " << &e << endl;
 }
 void pointers(void)
 {
@@ -30,11 +216,22 @@ void pointers(void)
   //the basic usage of pointers in c++ is the same as in c:
   int *p = &value;
   cout << "The value of the pointer p is: " << *p;
-  unsigned long long *memory = new unsigned long long int;
+  unsigned long long *memory = new unsigned long long;
   //allocate memory for an unsigned long long int and get access to it through memory pointer;
   *memory = 11ULL;//11 must be of type unsigned long long int, even though it should be converted
   //by default, i'd still prefer that it would be converted later
-  
+  delete memory;
+  //allocate space for the double:
+  double *pt = new double;
+  *pt = 35.5;
+  cout << "The value of the double is: " << *pt << ", \n the address:" << pt << endl;
+  delete pt;
+  int *p_1 = new int;
+  cout << "The address of the allocated memory is: " << p_1;
+  delete p_1;
+  long double *p_2 = new long double;
+  delete p_2;
+  //The output from the valrind is the following: all bytes were freed
 }
 //enums:
 void enums(void)

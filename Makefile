@@ -2,7 +2,7 @@ CPP := g++
 CXXFLAGS := -Wall -Wextra -Wpedantic 
 #Link the files:
 run: c1
-	./c1
+	valgrind ./c1
 
 
 c: cpp.o
