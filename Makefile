@@ -1,5 +1,5 @@
 CPP := g++
-CXXFLAGS := -Wall -Wextra -Wpedantic 
+CXXFLAGS := -g -Wall -Wextra -Wpedantic 
 #Link the files:
 run: c
 	valgrind ./c
